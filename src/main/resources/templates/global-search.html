@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="">
 <head>
     <meta charset="UTF-8"/>
     <title>Dashboard</title>
@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/styles.css}"/>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
     <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
 </head>
 
@@ -194,8 +194,8 @@
                         </div>
                     </div>
                 </div>
-                <input id="hidJob" name="job" th:value="${job}" hidden>
-                <input id="hidLoc" name="location" th:value="${location}" hidden>
+                <label for="hidJob"></label><input id="hidJob" name="job" th:value="${job}" hidden>
+                <label for="hidLoc"></label><input id="hidLoc" name="location" th:value="${location}" hidden>
             </form>
         </div>
     </div>
