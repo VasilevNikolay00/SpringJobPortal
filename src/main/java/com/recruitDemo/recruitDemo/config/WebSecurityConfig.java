@@ -34,7 +34,11 @@ public class WebSecurityConfig {
             "/*.css",
             "/*.js",
             "/*.js.map",
-            "/fonts**", "/favicon.ico", "/resources/**", "/error"};
+            "/fonts**",
+            "/static/favicon.ico",
+            "favicon.ico",
+            "/resources/**",
+            "/error"};
 
     @Autowired
     public WebSecurityConfig(CustomUserDetailService customUserDetailService, CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {
@@ -47,7 +51,6 @@ public class WebSecurityConfig {
 
         httpSecurity.authorizeHttpRequests(auth -> {
             auth.requestMatchers(publicUrl).permitAll();
-
             auth.anyRequest().authenticated();
         });
 
@@ -63,7 +66,6 @@ public class WebSecurityConfig {
     }
 
 
-    @Bean
     public AuthenticationProvider authenticationProvider(){
 
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
