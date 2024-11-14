@@ -4,8 +4,6 @@ import java.util.UUID;
 
 public  class GenerateApiKeys {
 
-    private int size = 32;
-
     public static String generateApiKey(){
 
         // create a string of all characters
@@ -21,7 +19,7 @@ public  class GenerateApiKeys {
         Random random = new Random();
 
         // specify length of random string
-        int length = 7;
+        int length = 32;
 
         for(int i = 0; i < length; i++) {
 
@@ -36,9 +34,9 @@ public  class GenerateApiKeys {
             sb.append(randomChar);
         }
 
-        String randomString = sb.toString();
 
-        return randomString;
+
+        return sb.toString();
     }
 
 }
