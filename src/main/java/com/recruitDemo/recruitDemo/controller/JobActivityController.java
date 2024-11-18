@@ -10,18 +10,16 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpStatusCodeException;
 
 import java.time.LocalDate;
 import java.util.*;
 
 @Controller
-public class JobPostActivityController {
+public class JobActivityController {
 
     private final UserService userService;
     private final JobActivityService jobActivityService;
@@ -29,7 +27,7 @@ public class JobPostActivityController {
     private final JobSeekerSaveService jobSeekerSaveService;
 
     @Autowired
-    public JobPostActivityController(UserService userService, JobActivityService jobActivityService, JobSeekerApplyService jobSeekerApplyService, JobSeekerSaveService jobSeekerSaveService) {
+    public JobActivityController(UserService userService, JobActivityService jobActivityService, JobSeekerApplyService jobSeekerApplyService, JobSeekerSaveService jobSeekerSaveService) {
         this.userService = userService;
         this.jobActivityService = jobActivityService;
         this.jobSeekerApplyService = jobSeekerApplyService;

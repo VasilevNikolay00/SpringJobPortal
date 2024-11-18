@@ -85,8 +85,14 @@
                 </div>
             </form>
         </div>
+        <form th:action="@{/api-key/addNew}" th:object="${key}" method="post" enctype="multipart/form-data">
+            <div class="col d-flex justify-content-center">
+            <button type="submit" id="submit3" name="submit" class="btn btn-primary base_button px-4 py-2">Generate Api Key</button>
+            </div>
+        </form>
     </div>
 </div>
+
 </body>
 <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>

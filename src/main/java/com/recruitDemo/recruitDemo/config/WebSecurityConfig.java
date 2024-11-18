@@ -38,7 +38,10 @@ public class WebSecurityConfig {
             "/static/favicon.ico",
             "favicon.ico",
             "/resources/**",
-            "/error"};
+            "/error",
+            "/api",
+            "/api/**"
+    };
 
     @Autowired
     public WebSecurityConfig(CustomUserDetailService customUserDetailService, CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler) {

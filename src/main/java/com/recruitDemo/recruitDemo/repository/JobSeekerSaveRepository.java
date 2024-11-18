@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface JobSeekerSaveRepository extends JpaRepository<JobSeekerSave, Integer> {
 
-    public List<JobSeekerSave> findByUserId(JobSeekerProfile userAccountId);
+     List<JobSeekerSave> findByUserId(JobSeekerProfile userAccountId);
 
-    List<JobSeekerSave> findByJob(JobActivity jobActivityId);
+     List<JobSeekerSave> findByJob(JobActivity jobActivityId);
 
 }

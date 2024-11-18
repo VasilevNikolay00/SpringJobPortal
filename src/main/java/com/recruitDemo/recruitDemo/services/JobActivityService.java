@@ -1,6 +1,8 @@
 package com.recruitDemo.recruitDemo.services;
 
+import com.recruitDemo.recruitDemo.dto.JobActivityDTO;
 import com.recruitDemo.recruitDemo.entity.*;
+import com.recruitDemo.recruitDemo.mapper.JobActivityMapper;
 import com.recruitDemo.recruitDemo.repository.JobActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +15,12 @@ import java.util.Objects;
 @Service
 public class JobActivityService {
     private final JobActivityRepository jobActivityRepository;
+    private final JobActivityMapper jobActivityMapper;
 
     @Autowired
-    public JobActivityService(JobActivityRepository jobActivityRepository) {
+    public JobActivityService(JobActivityRepository jobActivityRepository, JobActivityMapper jobActivityMapper) {
         this.jobActivityRepository = jobActivityRepository;
+        this.jobActivityMapper = jobActivityMapper;
     }
 
     public JobActivity addNew(JobActivity jobActivity){
@@ -55,5 +59,11 @@ public class JobActivityService {
     public List<JobActivity> search(String job, String location, List<String> type, List<String> remote, LocalDate searchDate) {
         return Objects.isNull(searchDate)?jobActivityRepository.searchWithoutDate(job,location,remote,type):
                 jobActivityRepository.search(job,location,remote,type,searchDate);
+    }
+
+
+    public JobActivityDTO getOneRest(int id) {
+
+        return jobActivityMapper.apply(jobActivityRepository.findById(id).orElseThrow(()->new RuntimeException("Job not found.")));
     }
 }
