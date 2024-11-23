@@ -75,9 +75,4 @@ public class UserController {
         return "redirect:/dashboard/";
     }
 
-//    @PostMapping("/login")
-//    public String loginAttempt(@Valid User user, Model model){
-//
-//    }
-
 }

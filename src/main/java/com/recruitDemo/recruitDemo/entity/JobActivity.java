@@ -1,9 +1,12 @@
 package com.recruitDemo.recruitDemo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -64,6 +67,7 @@ public class JobActivity {
         this.postedDate = postedDate;
         this.jobTitle = jobTitle;
     }
+
 
     public Integer getJobPostId() {
         return jobPostId;

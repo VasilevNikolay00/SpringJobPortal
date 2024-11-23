@@ -4,6 +4,8 @@ import com.recruitDemo.recruitDemo.dto.JobActivityDTO;
 import com.recruitDemo.recruitDemo.entity.JobActivity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 @Service
@@ -23,4 +25,5 @@ public class JobActivityMapper implements Function<JobActivity, JobActivityDTO> 
                 jobActivity.getPostedDate()
                 );
     }
+
 }

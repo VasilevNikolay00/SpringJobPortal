@@ -159,7 +159,6 @@ public class JobActivityController {
     public String addJobs(Model model){
         model.addAttribute("jobActivity",new JobActivity());
         model.addAttribute("user",userService.getCurrentUserProfile());
-        System.out.println(userService.getCurrentUserProfile());
         return "add-jobs";
     }
 
@@ -265,7 +264,6 @@ public class JobActivityController {
                     Arrays.asList(remoteOnly, officeOnly, partialRemote), searchDate);
         }
 
-        System.out.println(jobPost.toString());
         model.addAttribute("jobPost", jobPost);
 
 
