@@ -21,7 +21,7 @@ public class RestExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Object> handleEntityNotFoundException(HttpServletRequest req,EntityNotFoundException exception) {
 
-        String error = "There is no job post with this ID: "+ exception.getMessage()+".";
+        String error = "No such resource exists";
         return buildResponseEntity(new ErrorResponse(HttpStatus.NOT_FOUND, error, LocalDateTime.now()));
     }
     @ExceptionHandler(HttpMessageNotReadableException.class)

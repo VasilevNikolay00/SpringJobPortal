@@ -1,14 +1,14 @@
 package com.recruitDemo.recruitDemo.controller;
 
 import com.recruitDemo.recruitDemo.dto.JobActivityDTO;
+import com.recruitDemo.recruitDemo.dto.JobLocationDTO;
 import com.recruitDemo.recruitDemo.dto.JobPostCreateDTO;
 import com.recruitDemo.recruitDemo.dto.SearchJobActivityDTO;
 import com.recruitDemo.recruitDemo.services.JobActivityService;
-import com.recruitDemo.recruitDemo.services.UserService;
+import com.recruitDemo.recruitDemo.services.JobLocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -16,13 +16,13 @@ import java.util.List;
 public class JobActivityRestController {
 
     private final JobActivityService jobActivityService;
-    private final UserService userService;
+    private final JobLocationService jobLocationService;
 
 
     @Autowired
-    public JobActivityRestController(JobActivityService jobActivityService, UserService userService) {
+    public JobActivityRestController(JobActivityService jobActivityService, JobLocationService jobLocationService) {
         this.jobActivityService = jobActivityService;
-        this.userService = userService;
+        this.jobLocationService = jobLocationService;
     }
 
     @GetMapping("")
@@ -46,6 +46,11 @@ public class JobActivityRestController {
         return jobActivityService.search(request);
     }
 
+    @GetMapping("/location")
+    public JobLocationDTO requestLocation(@Validated @RequestBody JobLocationDTO request){
+        return jobLocationService.getJobLocationDTO(request);
+    }
+
    @DeleteMapping("/{id}")
    public void deleteJobById(@PathVariable("id") int id) {
        jobActivityService.removeJob(id);
@@ -56,8 +61,8 @@ public class JobActivityRestController {
        jobActivityService.addNew(request,id);
    }
 
-    @PostMapping("/")
-    public void createJob(@Validated @RequestBody JobPostCreateDTO request) {
+   @PostMapping("/")
+   public void createJob(@Validated @RequestBody JobPostCreateDTO request) {
         jobActivityService.addNew(request);
     }
 

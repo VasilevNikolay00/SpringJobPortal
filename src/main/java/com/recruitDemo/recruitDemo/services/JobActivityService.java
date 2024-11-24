@@ -23,15 +23,19 @@ public class JobActivityService {
     private final JobSeekerApplyService jobSeekerApplyService;
     private final JobSeekerSaveService jobSeekerSaveService;
     private final UserService userService;
+    private final JobLocationService jobLocationService;
+    private final JobCompanyService jobCompanyService;
 
 
     @Autowired
-    public JobActivityService(JobActivityRepository jobActivityRepository, JobActivityMapper jobActivityMapper, JobSeekerApplyService jobSeekerApplyService, JobSeekerSaveService jobSeekerSaveService, UserService userService) {
+    public JobActivityService(JobActivityRepository jobActivityRepository, JobActivityMapper jobActivityMapper, JobSeekerApplyService jobSeekerApplyService, JobSeekerSaveService jobSeekerSaveService, UserService userService, JobLocationService jobLocationService, JobCompanyService jobCompanyService) {
         this.jobActivityRepository = jobActivityRepository;
         this.jobActivityMapper = jobActivityMapper;
         this.jobSeekerApplyService = jobSeekerApplyService;
         this.jobSeekerSaveService = jobSeekerSaveService;
         this.userService = userService;
+        this.jobLocationService = jobLocationService;
+        this.jobCompanyService = jobCompanyService;
     }
 
     public JobActivity addNew(JobActivity jobActivity){
@@ -40,17 +44,32 @@ public class JobActivityService {
 
     public void addNew(JobPostCreateDTO dto){
         JobActivity job = new JobActivity();
-        JobLocation location = new JobLocation();
-        location.setCity(dto.city());
-        location.setCountry(dto.country());
-        JobCompany company = new JobCompany();
-        company.setName(dto.companyName());
+        JobCompany company = jobCompanyService.getCompanyEntity(dto.companyName());
+        JobLocation location = jobLocationService.getJobLocation(dto.city(),dto.state(),dto.country());
+
+        if(Objects.isNull(company)){
+            company = new JobCompany();
+            company.setName(dto.companyName());
+            job.setJobCompanyId(company);
+        }else{
+            job.setJobCompanyId(company);
+        }
+        System.out.println(location);
+        if(Objects.isNull(location)){
+            location = new JobLocation();
+            location.setCity(dto.city());
+            location.setState(dto.state());
+            location.setCountry(dto.country());
+
+            job.setJobLocationId(location);
+        }else{
+            job.setJobLocationId(location);
+        }
+
         job.setPostedById(userService.findByEmail(dto.userId()));
         job.setJobTitle(dto.jobTitle());
         job.setRemote(dto.remote());
         job.setJobType(dto.jobType());
-        job.setJobLocationId(location);
-        job.setJobCompanyId(company);
         job.setDescription(dto.description());
         job.setSalary(dto.salary());
         job.setPostedDate(new Date());
